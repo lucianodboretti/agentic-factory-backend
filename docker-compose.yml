@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: agentic_factory_db
+    environment:
+      POSTGRES_USER: af_user
+      POSTGRES_PASSWORD: af_pass
+      POSTGRES_DB: agentic_factory
+    ports:
+      - "5432:5432"
+    volumes:
+      - agentic_factory_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U af_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - agentic_factory_net
+
+volumes:
+  agentic_factory_pgdata:
+
+networks:
+  agentic_factory_net:
+    driver: bridge

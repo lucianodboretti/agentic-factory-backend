@@ -1,0 +1,40 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Thread {
+  id        String     @id @default(uuid())
+  title     String?
+  createdAt DateTime   @default(now())
+  messages  Message[]
+}
+
+model Message {
+  id        Int        @id @default(autoincrement())
+  thread    Thread     @relation(fields: [threadId], references: [id])
+  threadId  String
+  role      String     // 'user' or 'assistant'
+  content   String
+  name      String?
+  createdAt DateTime   @default(now())
+  assistantId  String?
+}
+
+model AssistantPrompt {
+  id        String   @id
+  name      String
+  role      String
+  goal      String
+  tools     String[]
+  memory    String[]
+  format    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
