@@ -131,8 +131,8 @@ export default function ChatPage() {
 | Editable thread titles           | ✅     |
 | Thread persistence in DB         | ✅     |
 | Streaming chat with OpenAI       | ✅     |
-| Saving both user + assistant msg | Not Working     |
-| Project list refresh             | Not Working     |
+| Saving both user + assistant msg | ✅     |
+| Project list refresh             | ✅     |
 | Type-safe routes (TS)            | ✅     |
 
 ---
